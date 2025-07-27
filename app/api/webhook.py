@@ -5,7 +5,7 @@ from sqlalchemy.orm import Session
 from app.db.database import get_db
 from app.services import response_formatter, game_service
 from app.menssager_client import telegram_client
-
+from unidecode import unidecode
 
 router = APIRouter()
 
@@ -19,7 +19,8 @@ async def handle_telegram_webhook(request: Request, background_tasks: Background
             return {"status": "ok"} # Ignora atualizações sem mensagem de texto
 
         user_id = str(data["message"]["from"]["id"])
-        text = data["message"]["text"].strip().upper()
+        raw_text = data["message"]["text"].strip()
+        text = unidecode(raw_text).upper()
         
         logging.info(f"Mensagem '{text}' recebida do usuário {user_id}")
 
