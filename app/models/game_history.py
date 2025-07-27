@@ -10,7 +10,7 @@ class GameHistory(Base):
     id = Column(Integer, primary_key=True, index=True)
     user_id = Column(String(255), nullable=False)
     secret_word = Column(String(5), nullable=False)
-    was_sucessful = Column(Boolean, nullable=False)
+    was_successful = Column(Boolean, nullable=False)
     guess_count = Column(Integer, nullable=False)
     guesses_list = Column(Text)
     finished_at = Column(DateTime(timezone=True), server_default=func.now())

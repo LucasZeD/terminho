@@ -35,6 +35,8 @@ async def handle_telegram_webhook(request: Request, background_tasks: Background
 
     except Exception as e:
         logging.error(f"Erro ao processar webhook do Telegram: {e}", exc_info=True)
-        # É uma boa prática notificar o usuário que algo deu errado, se possível.
+        # Notifica o usuário que algo deu errado
+        error_message = "Desculpe, ocorreu um erro inesperado. Tente novamente mais tarde."
+        background_tasks.add_task(telegram_client.send_message, user_id=user_id, text=error_message)
     
     return {"status": "ok"}

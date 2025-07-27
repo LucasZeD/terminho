@@ -5,9 +5,10 @@ does not matter which messager app it uses
 '''
 import json
 from sqlalchemy.orm import Session
-from app.db.redis_client import redis_client, SESSION_TTL_SECONDS
+from app.db.redis_client import redis_client
 from app.services import game_logic, response_formatter
 from app.crud import crud_game
+from app.core.config import settings
 
 word_list = game_logic.load_dictionary()
 
@@ -25,7 +26,7 @@ def process_user_turn(db: Session, user_id: str, text: str) -> str:
             "guesses": [],
             "status": "IN_PROGRESS"
         }
-        redis_client.set(session_key, json.dumps(new_session), ex=SESSION_TTL_SECONDS)
+        redis_client.set(session_key, json.dumps(new_session), ex=settings.SESSION_TTL_SECONDS)
         return response_formatter.get_initial_instructions()
 
     # Se um jogo está em andamento, processa a tentativa
