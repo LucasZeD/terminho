@@ -3,7 +3,7 @@ import asyncio
 from fastapi import FastAPI
 from app.core.config import settings
 from app.api import webhook
-from app.services.telegram_client import set_webhook
+from app.menssager_client.telegram_client import set_webhook
 
 logging.basicConfig(
     level=logging.INFO,
