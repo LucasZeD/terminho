@@ -1,0 +1,10 @@
+fastapi
+uvicorn[standard]
+gunicorn
+redis
+SQLAlchemy
+psycopg2-binary
+pydantic-settings
+httpx
+sentry-sdk[fastapi]
+python-telegram-bot
