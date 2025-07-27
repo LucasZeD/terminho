@@ -3,12 +3,13 @@ import asyncio
 from fastapi import FastAPI
 from app.core.config import settings
 from app.api import webhook
+from app.db.database import engine
+from app.models.game_history import Base
 from app.menssager_client.telegram_client import set_webhook
 
-logging.basicConfig(
-    level=logging.INFO,
-    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
-)
+Base.metadata.create_all(bind=engine)
+
+logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
 
 app = FastAPI(
     title="Terminho Bot para Telegram",
