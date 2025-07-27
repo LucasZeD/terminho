@@ -1,7 +1,6 @@
 import json
 import logging
 from fastapi import APIRouter, Request, Depends, HTTPException, BackgroundTasks
-from structure2.app.client import whatsapp_client
 from telegram.ext import Application, CommandHandler, MessageHandler, filters, ContextTypes
 from sqlalchemy.orm import Session
 from app.core.config import settings
