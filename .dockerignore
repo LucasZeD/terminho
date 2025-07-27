@@ -1,0 +1,21 @@
+# .dockerignore
+
+# Ignorar o ambiente virtual do Python
+venv/
+.venv/
+
+# Ignorar caches do Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Ignorar o arquivo de variáveis de ambiente local
+.env
+
+# Ignorar arquivos e pastas do Git
+.git
+.gitignore
+
+# Ignorar arquivos do VSCode
+.vscode/
