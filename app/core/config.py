@@ -8,10 +8,10 @@ class Settings(BaseSettings):
     WEBHOOK_URL: str
     TELEGRAM_BOT_TOKEN: str
     SESSION_TTL_SECONDS: int = 57600
-    ENVIRONMENT: str = "production"
     ADMIN_USERNAME: str
     ADMIN_PASSWORD: str
      
+    ENVIRONMENT: str = "production"
     model_config = SettingsConfigDict(env_file=".env")
 
 settings = Settings()

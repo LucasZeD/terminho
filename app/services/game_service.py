@@ -21,13 +21,13 @@ def process_user_turn(db: Session, user_id: str, text: str) -> str:
     # Se não há jogo ou o jogo anterior terminou, inicia um novo jogo
     if not session or session.get("status") in ["WON", "LOST"]:
         new_word = game_logic.get_random_word()
-        new_session = {
+        session = {
             "secret_word": new_word,
             "guesses": [],
             "status": "IN_PROGRESS"
         }
-        redis_client.set(session_key, json.dumps(new_session), ex=settings.SESSION_TTL_SECONDS)
-        return response_formatter.get_initial_instructions()
+        # redis_client.set(session_key, json.dumps(new_session), ex=settings.SESSION_TTL_SECONDS)
+        # return response_formatter.get_initial_instructions()
 
     # Se um jogo está em andamento, processa a tentativa
     # Validações da tentativa
@@ -56,6 +56,6 @@ def process_user_turn(db: Session, user_id: str, text: str) -> str:
         redis_client.delete(session_key)
     else: # Jogo continua
         reply_text = response_formatter.format_current_game(session)
-        redis_client.set(session_key, json.dumps(session), ex=SESSION_TTL_SECONDS)
+        redis_client.set(session_key, json.dumps(session), ex=settings.SESSION_TTL_SECONDS)
     
     return reply_text

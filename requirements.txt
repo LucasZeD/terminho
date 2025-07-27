@@ -9,3 +9,4 @@ httpx
 sentry-sdk[fastapi]
 python-telegram-bot
 jinja2
+unidecode
