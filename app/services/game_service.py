@@ -8,7 +8,6 @@ from sqlalchemy.orm import Session
 from app.db.redis_client import redis_client, SESSION_TTL_SECONDS
 from app.services import game_logic, response_formatter
 from app.crud import crud_game
-from structure2.app.client import whatsapp_client
 
 word_list = game_logic.load_dictionary()
 
