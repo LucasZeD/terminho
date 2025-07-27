@@ -5,11 +5,11 @@ from pydantic_settings import BaseSettings, SettingsConfigDict
 class Settings(BaseSettings):
     DATABASE_URL: str
     REDIS_URL: str
-    SENTRY_DSN: str
-    WHATSAPP_API_TOKEN: str
-    WHATSAPP_PHONE_NUMBER_ID: str
-    VERIFY_TOKEN: str
+    WEBHOOK_URL: str
+    TELEGRAM_BOT_TOKEN: str
     
+    ENVIRONMENT: str = "production"
+     
     model_config = SettingsConfigDict(env_file=".env")
 
 settings = Settings()
