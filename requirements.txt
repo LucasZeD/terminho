@@ -8,3 +8,4 @@ pydantic-settings
 httpx
 sentry-sdk[fastapi]
 python-telegram-bot
+jinja2

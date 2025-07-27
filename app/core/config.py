@@ -9,6 +9,8 @@ class Settings(BaseSettings):
     TELEGRAM_BOT_TOKEN: str
     SESSION_TTL_SECONDS: int = 57600
     ENVIRONMENT: str = "production"
+    ADMIN_USERNAME: str
+    ADMIN_PASSWORD: str
      
     model_config = SettingsConfigDict(env_file=".env")
 

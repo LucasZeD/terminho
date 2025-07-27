@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Admin - Terminho Bot</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css">
+    <style>
+        body { padding: 2rem; }
+        .grid { grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); }
+        article { text-align: center; }
+        h2 { margin-bottom: 0.5rem; }
+    </style>
+</head>
+<body>
+    <main class="container">
+        <header>
+            <h1>Painel de Controle - Terminho Bot</h1>
+            <p>Bem-vindo, <strong>{{ username }}</strong>!</p>
+        </header>
+
+        <h2>Estatísticas Gerais</h2>
+        <div class="grid">
+            <article>
+                <h2 title="Total de jogos finalizados">{{ stats.total_games }}</h2>
+                <p>Jogos Finalizados</p>
+            </article>
+            <article>
+                <h2 title="Total de vitórias">{{ stats.games_won }}</h2>
+                <p>Vitórias</p>
+            </article>
+            <article>
+                <h2 title="Percentual de vitórias">{{ stats.win_rate }}%</h2>
+                <p>Taxa de Vitória</p>
+            </article>
+            <article>
+                <h2 title="Média de tentativas para vencer">{{ stats.avg_guesses_on_win }}</h2>
+                <p>Média de Tentativas (Vitória)</p>
+            </article>
+        </div>
+
+        <h2 style="margin-top: 2rem;">Jogos Ativos (Sessões no Redis)</h2>
+        <figure>
+            <table>
+                <thead>
+                    <tr>
+                        <th scope="col">User ID</th>
+                        <th scope="col">Palavra Secreta</th>
+                        <th scope="col">Nº de Tentativas</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for game in active_games %}
+                    <tr>
+                        <td>{{ game.user_id }}</td>
+                        <td><code>{{ game.secret_word }}</code></td>
+                        <td>{{ game.guess_count }}</td>
+                    </tr>
+                    {% else %}
+                    <tr>
+                        <td colspan="3" style="text-align: center;">Nenhum jogo ativo no momento.</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </figure>
+    </main>
+</body>
+</html>

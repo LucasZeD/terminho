@@ -6,6 +6,7 @@ from app.api import webhook
 from app.db.database import engine
 from app.models.game_history import Base
 from app.menssager_client.telegram_client import set_webhook
+from app.admin.router import router as admin_router
 
 Base.metadata.create_all(bind=engine)
 
@@ -26,3 +27,7 @@ def read_root():
     return {"status": "ok", "message": "Wordle Bot is running!"}
 
 app.include_router(webhook.router, prefix="/api/v1", tags=["Telegram"])
+
+app.include_router(webhook.router, prefix="/api/v1", tags=["Telegram"])
+
+app.include_router(admin_router, prefix="/admin", tags=["Admin"])
