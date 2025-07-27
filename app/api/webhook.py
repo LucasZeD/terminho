@@ -1,4 +1,5 @@
 import json
+import logging
 from fastapi import APIRouter, Request, Depends, HTTPException, BackgroundTasks
 from sqlalchemy.orm import Session
 from app.db.database import get_db
