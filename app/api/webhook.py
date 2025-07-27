@@ -2,7 +2,8 @@ import json
 from fastapi import APIRouter, Request, Depends, HTTPException, BackgroundTasks
 from sqlalchemy.orm import Session
 from app.db.database import get_db
-from app.services import response_formatter, telegram_client, game_service
+from app.services import response_formatter, game_service
+from app.menssager_client import telegram_client
 
 
 router = APIRouter()
