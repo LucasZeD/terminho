@@ -16,3 +16,7 @@ def get_dashboard_stats(db: Session) -> dict:
         "win_rate": round(win_rate, 2),
         "avg_guesses_on_win": round(avg_guesses, 2) if avg_guesses else 0
     }
+    
+def get_recent_games(db: Session, limit: int = 10) -> list[GameHistory]:
+    """Busca os últimos jogos finalizados no banco de dados."""
+    return db.query(GameHistory).order_by(GameHistory.finished_at.desc()).limit(limit).all()

@@ -64,6 +64,39 @@
                 </tbody>
             </table>
         </figure>
+
+        <h2 style="margin-top: 2rem;">Histórico de Jogos Recentes (PostgreSQL)</h2>
+        <figure>
+            <table>
+                <thead>
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">Usuário</th>
+                        <th scope="col">Palavra Secreta</th>
+                        <th scope="col">Resultado</th>
+                        <th scope="col">Histórico de Tentativas</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for game in recent_games %}
+                    <tr>
+                        <td>{{ game.id }}</td>
+                        <td>{{ game.user_id[-4:] }}</td> <td><code>{{ game.secret_word }}</code></td>
+                        <td>{% if game.was_successful %}✅ Vitória {% else %}❌ Derrota {% endif %}</td>
+                        <td>
+                            {% for attempt in game.reconstructed_history %}
+                                <div>{{ loop.index }}: {{ attempt.word }} / {{ attempt.result }}</div>
+                            {% endfor %}
+                        </td>
+                    </tr>
+                    {% else %}
+                    <tr>
+                        <td colspan="5" style="text-align: center;">Nenhum histórico de jogo encontrado.</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </figure>
     </main>
 </body>
 </html>
