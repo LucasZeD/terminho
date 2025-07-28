@@ -11,6 +11,7 @@ def _guesses_to_string(guesses: list[dict]) -> str:
     return ",".join(word_list)
 
 def save_finished_game(db: Session, user_id: str, session_data: dict):
+    guesses_string = _guesses_to_string(session_data["guesses"])
     history_entry = GameHistory(
         user_id=user_id,
         secret_word = session_data["secret_word"],
