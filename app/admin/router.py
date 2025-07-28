@@ -4,12 +4,11 @@ from fastapi import APIRouter, Depends, HTTPException, status, Request
 from fastapi.security import HTTPBasic, HTTPBasicCredentials
 from fastapi.templating import Jinja2Templates
 from sqlalchemy.orm import Session
-from app.crud.crud_admin import get_dashboard_stats, get_recent_games # Adicionar get_recent_games
-from app.services import game_logic # Precisamos da lógica de verificação de palavras
+from app.services import game_logic
 from app.core.config import settings
 from app.db.database import get_db
-from app.db.redis_client import get_active_games, get_recent_games
-from app.crud.crud_admin import get_dashboard_stats
+from app.db.redis_client import get_active_games
+from app.crud.crud_admin import get_dashboard_stats, get_recent_games
 
 router = APIRouter()
 security = HTTPBasic()
@@ -39,7 +38,7 @@ async def get_admin_dashboard(
     """
     stats = get_dashboard_stats(db)
     active_games = get_active_games()
-    ecent_games_raw = get_recent_games(db)
+    recent_games_raw = get_recent_games(db)
     
     # Processa os jogos recentes para reconstruir os resultados
     recent_games_processed = []
